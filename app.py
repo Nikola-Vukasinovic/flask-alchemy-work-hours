@@ -4,6 +4,7 @@ from work_hours_app import app
 
 
 if __name__ == "__main__":
+    # Load dotenv vars
     load_dotenv()
     environment = os.getenv('ENVIRONMENT',  'development')
 
