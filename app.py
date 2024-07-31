@@ -1,0 +1,17 @@
+import os
+from dotenv import load_dotenv
+from work_hours_app import app
+
+
+if __name__ == "__main__":
+    load_dotenv()
+    environment = os.getenv('ENVIRONMENT',  'development')
+
+    if environment == "production":
+        load_dotenv('.env.production')
+    elif environment == "development":
+        load_dotenv('.env.development')
+    else:
+        raise ValueError("Invalid environment name")
+
+    app.run(debug=os.getenv("DEBUG_LEVEL"))
