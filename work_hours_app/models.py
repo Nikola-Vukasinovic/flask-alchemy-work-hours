@@ -1,13 +1,28 @@
-from work_hours_app import db, login_manager
+from work_hours_app import app, db, login_manager
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime
-
+import os
 
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(user_id)
 
+
+@app.cli.command("create-admin")
+def create_admin():
+    """Creates an admin user."""    
+    # Create the admin user
+    admin_name = os.environ.get("ADMIN_NAME", "admin")
+    admin_pass = os.environ.get("ADMIN_PASS", "Admin!1")
+    admin_user = User(username=admin_name,
+                      password=generate_password_hash(admin_pass),
+                      email=None,
+                      is_admin=True)
+    
+    db.session.add(admin_user)
+    db.session.commit()
+    print(f"Admin user '{admin_name}' created successfully!")
 
 class User(db.Model):
     __tablename__ = "users"
