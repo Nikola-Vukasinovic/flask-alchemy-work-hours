@@ -1,6 +1,40 @@
 {% extends 'core/base.html' %}
 {% block content %}
 
-<button type="button" class="btn btn-primary">Primary</button>
-    
+<style>
+    /* Ensure the parent container takes the full viewport height */
+    .full-height {
+        height: 100vh;
+    }
+    /* Ensure the parent container takes the full viewport width */
+    .full-width {
+        width: 100vw;
+    }
+</style>
+
+<div class="container d-flex justify-content-center align-items-center full-height full-width">
+    <div class="card text-center">
+        <div class="card-body">
+            <h3 class="card-title">Hi! What did you do today?</h5>
+            <p class="card-text" id="datetime"><strong>Loading...</strong></p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function updateDateTime() {
+        var now = new Date();
+        var options = { 
+            weekday: 'long', 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric'
+        };
+        document.getElementById('datetime').innerHTML = now.toLocaleDateString('en-US', options);
+    }
+
+    // Initial call to display the date and time immediately
+    updateDateTime();
+</script>
+
 {% endblock %}
