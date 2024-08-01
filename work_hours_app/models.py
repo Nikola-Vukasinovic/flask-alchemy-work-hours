@@ -13,17 +13,21 @@ class User(db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key = True)
     username = db.Column(db.String(80), unique = True, index = True)
+    name = db.Column(db.String(80), nullable = True)
+    lastname = db.Column(db.String(80), nullable = True)
     password_hash = db.Column(db.String(128), unique = True, nullable = False)
     email = db.Column(db.String(120), unique = True, nullable = True)
     is_admin = db.Column(db.Boolean, default = False)
 
     entries = db.relationship("Entry", backref = "author", lazy = True)
 
-    def __init__(self, username, password, email = None, is_admin = False):
+    def __init__(self, username, password, email = None, is_admin = False, name = None, lastname = None):
         self.username = username
         self.password_hash = generate_password_hash(password)
         self.email = email
         self.is_admin = is_admin
+        self.name = name
+        self.lastname = lastname
 
     def __repr__(self):
         return f"User is: {self.username} with email: {self.email} is admin: {self.is_admin}"
@@ -34,7 +38,7 @@ class User(db.Model):
 
 class Entry(db.Model):
     __tablename__ = "entries"
-    
+
     users = db.relationship(User)
     
     id = db.Column(db.Integer, primary_key = True)
