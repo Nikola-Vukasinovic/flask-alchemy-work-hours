@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 from work_hours_app import app
+from work_hours_app.models import User, Entry
 
 
 if __name__ == "__main__":
