@@ -24,7 +24,7 @@ def create_admin():
     db.session.commit()
     print(f"Admin user '{admin_name}' created successfully!")
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key = True)
     username = db.Column(db.String(80), unique = True, index = True)
@@ -51,7 +51,7 @@ class User(db.Model):
         return check_password_hash(self.password_hash, password)
 
 
-class Entry(db.Model):
+class Entry(db.Model, UserMixin):
     __tablename__ = "entries"
     
     id = db.Column(db.Integer, primary_key = True)
