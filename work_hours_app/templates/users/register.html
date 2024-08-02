@@ -1,0 +1,59 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Register new user</h2>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        
+        <div class="form-group">
+            <strong>{{ form.username.label("Username") }}</strong>
+            {{ form.username(class="form-control", placeholder="Enter desired username") }}
+        </div>
+        <br>
+        
+        <div class="form-group">
+            <strong>{{ form.email.label("Email") }}</strong>
+            {{ form.email(class="form-control", placeholder="Enter desired email") }}
+        </div>
+        <br>
+        
+        <div class="form-group">
+            <strong>{{ form.firstname.label("First Name") }}</strong>
+            {{ form.firstname(class="form-control", placeholder="Enter first name") }}
+        </div>
+        <br>
+        
+        <div class="form-group">
+            <strong>{{ form.lastname.label("Last Name") }}</strong>
+            {{ form.lastname(class="form-control", placeholder="Enter last name") }}
+        </div>
+        <br>
+        
+        <div class="form-group">
+            <strong>{{ form.password.label(class="form-label") }}</strong>
+            {{ form.password(class="form-control", placeholder="Enter password") }}
+        </div>
+        <br>
+        
+        <div class="form-group">
+            <strong>{{ form.pass_confirm.label(class="form-label") }}</strong>
+            {{ form.pass_confirm(class="form-control", placeholder="Repeat password") }}
+        </div>
+        <br>
+        
+        <div class="form-group">
+            <strong>{{ form.is_admin.label("Make this admin account?") }}</strong><br>
+            {{ form.is_admin(class="form-check-input") }}
+            <small class="form-text text-muted">Check this box if you want to grant admin privileges to this account.</small>
+        </div>
+        <br>
+        
+        <div class="form-group">
+            {{ form.submit(class="btn btn-primary btn-block") }}
+        </div>
+    </form>
+</div>
+    
+{% endblock %}
