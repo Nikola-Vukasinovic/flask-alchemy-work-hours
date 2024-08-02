@@ -6,8 +6,8 @@
   <form method="POST">
     {{ form.hidden_tag() }}
     <div class="form-group">
-      {{ form.email.label(class="form-label") }}
-      {{ form.email(class="form-control", placeholder="Enter your username or email") }}
+      {{ form.username_or_email.label("Username or email") }}
+      {{ form.username_or_email(class="form-control", placeholder="Enter your username or email") }}
     </div>
     <br>
     <div class="form-group">

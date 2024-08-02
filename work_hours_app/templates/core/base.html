@@ -32,7 +32,10 @@
                         <a class="nav-link" href="#">Add Work Hours</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('entries.view_entries') }}">Work History</a>
+                        <a class="nav-link" href="#">Work History</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('users.logout') }}">Logout</a>
                     </li>
                 {% else %}
                     <li class='nav-item'>
