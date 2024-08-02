@@ -28,7 +28,7 @@ class User(db.Model, UserMixin):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key = True)
     username = db.Column(db.String(80), unique = True, index = True)
-    name = db.Column(db.String(80), nullable = True)
+    firstname = db.Column(db.String(80), nullable = True)
     lastname = db.Column(db.String(80), nullable = True)
     password_hash = db.Column(db.String(128), unique = True, nullable = False)
     email = db.Column(db.String(120), unique = True, nullable = True)
@@ -36,12 +36,12 @@ class User(db.Model, UserMixin):
 
     entries = db.relationship("Entry", backref = "user", lazy = True)
 
-    def __init__(self, username, password, email = None, is_admin = False, name = None, lastname = None):
+    def __init__(self, username, password, email = None, is_admin = False, firstname = None, lastname = None):
         self.username = username
         self.password_hash = generate_password_hash(password)
         self.email = email
         self.is_admin = is_admin
-        self.name = name
+        self.firstname = firstname
         self.lastname = lastname
 
     def __repr__(self):
