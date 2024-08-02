@@ -16,7 +16,7 @@ def create_admin():
     admin_name = os.environ.get("ADMIN_NAME", "admin")
     admin_pass = os.environ.get("ADMIN_PASS", "Admin!1")
     admin_user = User(username=admin_name,
-                      password=generate_password_hash(admin_pass),
+                      password=admin_pass,
                       email=None,
                       is_admin=True)
     
@@ -34,7 +34,7 @@ class User(db.Model):
     email = db.Column(db.String(120), unique = True, nullable = True)
     is_admin = db.Column(db.Boolean, default = False)
 
-    entries = db.relationship("Entry", backref = "author", lazy = True)
+    entries = db.relationship("Entry", backref = "user", lazy = True)
 
     def __init__(self, username, password, email = None, is_admin = False, name = None, lastname = None):
         self.username = username
@@ -53,8 +53,6 @@ class User(db.Model):
 
 class Entry(db.Model):
     __tablename__ = "entries"
-
-    users = db.relationship(User)
     
     id = db.Column(db.Integer, primary_key = True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable = False)
