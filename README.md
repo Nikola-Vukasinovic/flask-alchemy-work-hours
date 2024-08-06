@@ -2,15 +2,13 @@
 
 This is an demo app for logging and reporting work hours inside company. Currently app supports features like user registiration, user managament, work hours entry and review of past work.
 
-
 ### Prerequisites
 
-App has been developed & tested under venv with Python version 3.12. For the full list of needed packages review requirements. 
+App has been developed & tested under venv with Python version 3.12. For the full list of needed packages review requirements.
 
 App uses SQLAlchemy for storage level along with Migration feature.
 
 For app scaling features Flask Blueprinting was employed.
-
 
 ### Requirements
 
@@ -20,6 +18,9 @@ Project includes requirements.txt that can be installed with
 pip install -r requirements.txt
 ```
 
+### Security
+
+For hashing and security features project uses Werkzeug.
 
 ### Environment variables
 
