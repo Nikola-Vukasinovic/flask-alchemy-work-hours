@@ -29,10 +29,10 @@
                 </li>
                 {% if current_user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Add Work Hours</a>
+                        <a class="nav-link" href="{{ url_for('entries.add_hours') }}">Add Work Hours</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Work History</a>
+                        <a class="nav-link" href="{{ url_for('entries.view_entries') }}">Work History</a>
                     </li>
                     {% if current_user.is_admin %}
                     <li class="nav-item">
