@@ -34,7 +34,9 @@ login_manager.login_view = "users.login"
 
 from work_hours_app.core.views import core
 from work_hours_app.users.views import users
+from work_hours_app.entries.views import entries
 
 
 app.register_blueprint(core)
 app.register_blueprint(users)
+app.register_blueprint(entries)
