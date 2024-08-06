@@ -1,0 +1,38 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Add Working Hours</h2>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.date.label(class="form-label") }}
+            {{ form.date(class="form-control", placeholder="YYYY-MM-DD") }}
+        </div>
+        <br>
+        <div class="form-group">
+            {{ form.description.label(class="form-label") }}
+            {{ form.description(class="form-control", placeholder="Enter description") }}
+        </div>
+        <br>
+        <div class="form-group">
+            {{ form.hours.label(class="form-label") }}
+            {{ form.hours(class="form-control", placeholder="Enter hours worked") }}
+        </div>
+        <br>
+        <div class="form-group">
+            {{ form.time_start.label(class="form-label") }}
+            {{ form.time_start(class="form-control", placeholder="HH:MM") }}
+        </div>
+        <br>
+        <div class="form-group">
+            {{ form.time_end.label(class="form-label") }}
+            {{ form.time_end(class="form-control", placeholder="HH:MM") }}
+        </div>
+        <br>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+    </form>
+</div>
+{% endblock %}
