@@ -62,7 +62,8 @@ class Entry(db.Model, UserMixin):
     time_start = db.Column(db.Time, nullable = True)
     time_end = db.Column(db.Time, nullable = True)
 
-    def __init__(self, date, description, hours, time_start = None, time_end = None):
+    def __init__(self, user_id, date, description, hours, time_start = None, time_end = None):
+        self.user_id = user_id
         self.date = date
         self.description = description
         self.hours = hours
