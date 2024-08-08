@@ -5,26 +5,33 @@
     <h1>Generate Work History</h1>
     <form method="POST">
         <div class="mb-3">
-            {% if current_user.is_admin %}
-                {% set month_names = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"] %}
-                <label for="userDropdown">Select User:</label>
-                <select class="form-select" id="userDropdown" name="user_id">
+            <div class="form-group">
+                <label for="userSelect" class="form-label">Select User:</label>
+                <select id="userSelect" name="user_id" class="form-control">
                     {% for user in users %}
-                        <option value="{{ user.id }}" {% if user.id == selected_user_id %}selected{% endif %}>{{ user.username }} {{ user.firstname }} {{ user.lastname }}</option>
+                        <option value="{{ user.id }}" {% if user.id == selected_user_id %}selected{% endif %}>
+                            {{ user.username }} {{ user.firstname }} {{ user.lastname }}
+                        </option>
                     {% endfor %}
                 </select>
-            {% endif %}
-
-            <label for="monthDropdown">Select Month:</label>
-            <select class="form-select" id="monthDropdown" name="month">
-                {% set current_month = today.month %}
-                {% for m in range(1, current_month + 1) %}
-                    <option value="{{ m }}" {% if m == month %}selected{% endif %}>{{ month_names[m - 1] }}</option>
-                {% endfor %}
-            </select>
+            </div>
+            <br>
+            <div class="dropdown">
+                {% set month_names = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"] %}
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="monthDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    {% if month %} Month: {{ month_names[month - 1] }} {% else %} Choose a month {% endif %}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="monthDropdown">
+                    {% set current_month = today.month %}
+                    {% for m in range(1, current_month + 1) %}
+                    <a class="dropdown-item" href="#" onclick="setMonthAndSubmit({{ m }})">{{ month_names[m - 1] }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+            <input type="hidden" name="month" id="selectedMonth" value="{{ month }}">
         </div>
 
-        <button type="submit" class="btn btn-primary">Show Report</button>
+        <button type="submit" class="btn btn-primary">Show</button>
         <button type="button" class="btn btn-secondary" onclick="window.history.back();">Back</button>
     </form>
 
@@ -74,11 +81,6 @@
     </div>
 </div>
 
-<script>
-    function setMonthAndSubmit(month) {
-        document.getElementById('selectedMonth').value = month; // Set the hidden input value
-        document.forms[0].submit(); // Submit the form
-    }
-</script>
+<script src="{{ url_for('static', filename='scripts.js') }}"></script>
 
 {% endblock %}
