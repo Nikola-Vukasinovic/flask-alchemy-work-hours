@@ -68,11 +68,10 @@
     </div>
 </div>
 
-<script>
-    function setMonthAndSubmit(month) {
-        document.getElementById('selectedMonth').value = month; // Set the hidden input value
-        document.forms[0].submit(); // Submit the form
-    }
-</script>
+<br>
+
+<button class="btn btn-primary" onclick="window.location.href='{{ url_for('entries.add_hours') }}'">Add Hours</button>
+
+<script src="{{ url_for('static', filename='scripts.js') }}"></script>
 
 {% endblock %}
