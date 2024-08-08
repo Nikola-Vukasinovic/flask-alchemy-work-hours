@@ -56,7 +56,7 @@ class Entry(db.Model, UserMixin):
     
     id = db.Column(db.Integer, primary_key = True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable = False)
-    date = db.Column(db.DateTime, nullable = False, default = datetime.now())
+    date = db.Column(db.Date, nullable = False, default = datetime.now())
     description = db.Column(db.String(250), nullable = True)
     hours = db.Column(db.Integer, nullable = False)
     time_start = db.Column(db.Time, nullable = True)
