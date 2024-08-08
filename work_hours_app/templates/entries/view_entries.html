@@ -29,9 +29,9 @@
             <tr>
                 <th>Date</th>
                 <th>Description</th>
-                <th>Hours</th>
                 <th>Time Start</th>
                 <th>Time End</th>
+                <th>Hours</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -40,9 +40,9 @@
                 <tr>
                     <td>{{ entry.date }}</td>
                     <td>{{ entry.description }}</td>
-                    <td>{{ entry.hours }}</td>
                     <td>{{ entry.time_start }}</td>
                     <td>{{ entry.time_end }}</td>
+                    <td>{{ entry.hours }}</td>
                     <td>
                         <a href="{{ url_for('entries.edit_entry', entry_id=entry.id) }}" class="btn btn-sm btn-warning">Edit</a>
                     </td>
@@ -54,6 +54,18 @@
             {% endfor %}
         </tbody>
     </table>
+</div>
+
+<br>
+
+<div class="row mt-4">
+    <div class="col-12 col-md-6 offset-md-6"> <!-- 50% width on medium and larger screens, right-aligned -->
+        <div class="card text-end">
+            <div class="card-body">
+                <strong>Total Hours: {{ total_hours }}</strong>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>

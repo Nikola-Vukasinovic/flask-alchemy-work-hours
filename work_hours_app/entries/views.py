@@ -45,11 +45,16 @@ def add_hours():
 @entries.route('/view_entries', methods=["POST", "GET"])
 @login_required
 def view_entries():
-    """ TODO: Update this """
+    """Display entries for the current user or selected user if admin, based on selected month """
      # Default to the current month and year
     year = request.form.get('year', date.today().year)
     month = request.form.get('month', date.today().month)
     
+    if current_user.is_admin:
+        # If admin, get selected user and month from form data
+        selected_user_id = request.form.get('user_id', current_user.id)
+        month = request.form.get('month', date.today().month)
+
     # Convert year and month to integers
     year = int(year)
     month = int(month)
@@ -64,8 +69,13 @@ def view_entries():
         Entry.date >= first_day,
         Entry.date <= last_day
     ).all()
+
+    #Query all the users
+    users = User.query.all()  # Get all users for the dropdown if admin
+    # Calculate total hours
+    total_hours = sum(entry.hours for entry in entries)
     
-    return render_template('entries/view_entries.html', entries=entries, year=year, month=month, today=date.today())
+    return render_template('entries/view_entries.html', entries=entries, year=year, month=month, today=date.today(), total_hours=total_hours, users=users)
 
 
 @entries.route('/edit_entry/<int:entry_id>', methods=['GET', 'POST'])
@@ -86,3 +96,5 @@ def edit_entry(entry_id):
         return redirect(url_for('entries.view_entries'))
     
     return render_template('entries/edit_entry.html', form=form, entry=entry)
+
+
